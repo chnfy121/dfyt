@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">东方犹太</string>
+
+    <string-array name="tab_titles">
+        <item>首页</item>
+        <item>惠存金</item>
+        <item>网点</item>
+        <item>发现</item>
+        <item>我的</item>
+    </string-array>
+</resources>
