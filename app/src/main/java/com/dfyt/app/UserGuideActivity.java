@@ -21,11 +21,24 @@ public class UserGuideActivity extends BaseActivity {
     }
 
     @Override
-    protected void initContextView(LinearLayout contextView) {
-        super.initContextView(contextView);
-        //将activity_main布局加入主布局中
-        LayoutInflater layoutInflater = LayoutInflater.from(this);
-        contextView.addView(layoutInflater.inflate(R.layout.activity_user_guide,null));
+    protected void initContentView() {
+        super.initContentView();
+        setContentView(R.layout.activity_user_guide); //设置主布局
+    }
+
+    @Override
+    protected void initBottomNavigationBar() {
+        //禁用底部导航
+    }
+
+    @Override
+    protected void initToolBar() {
+        super.initToolBar();
+    }
+
+    @Override
+    protected void initClientView(LinearLayout clientView) {
+        super.initClientView(clientView);
     }
 
     private void initWebView(){

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
@@ -17,38 +18,36 @@ public class BaseActivity extends AppCompatActivity {
 
     private BottomNavigationBar bottomNavigationBar;
 
-    public void onCreate(Bundle savedInstanceState, boolean useToolBar, boolean useBottomNavigationBar) {
-        super.onCreate(savedInstanceState);
-        supportRequestWindowFeature(Window.FEATURE_NO_TITLE); //去掉系统的actionBar
-        setContentView(R.layout.activity_base);
-
-        if (useToolBar){
-            initToolBar();
-        }
-
-        initContextView((LinearLayout)findViewById(R.id.llClient));  //加入继承布局xml
-
-        if (useBottomNavigationBar){
-            initBottomNavigationBar(); //底部导航
-        }
+    public BottomNavigationBar getBottomNavigationBar() {
+        return bottomNavigationBar;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE); //去掉系统的actionBar
-        setContentView(R.layout.activity_base);
 
+        initContentView();
         initToolBar();
-        initContextView((LinearLayout)findViewById(R.id.llClient));  //加入继承布局xml
+        initClientView((LinearLayout)findViewById(R.id.llClient));  //加入继承布局xml
         initBottomNavigationBar(); //底部导航
     }
 
-    protected void initContextView(LinearLayout contextView){
+    //加载主布局
+    protected void initContentView(){
+        setContentView(R.layout.activity_base);
+    }
+
+    //主布局下Clinet布局
+    protected void initClientView(LinearLayout clientView){
 
     }
 
+    //toolbar导航
     protected void initToolBar(){
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        layoutInflater.inflate(R.layout.activity_login,null);
+
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -61,6 +60,7 @@ public class BaseActivity extends AppCompatActivity {
         });
     }
 
+    //底部导航
     protected void initBottomNavigationBar(){
         bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
 
@@ -74,7 +74,15 @@ public class BaseActivity extends AppCompatActivity {
         bottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener(){
             @Override
             public void onTabSelected(int position) {
-
+                switch (position){
+                    case 0:
+                        onBackPressed();
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                }
             }
             @Override
             public void onTabUnselected(int position) {

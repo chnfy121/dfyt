@@ -32,12 +32,12 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void initContextView(LinearLayout contextView) {
-        super.initContextView(contextView);
+    protected void initClientView(LinearLayout clientView) {
+        super.initClientView(clientView);
 
         //将activity_main布局加入主布局中
         LayoutInflater layoutInflater = LayoutInflater.from(this);
-        contextView.addView(layoutInflater.inflate(R.layout.activity_main,null));
+        clientView.addView(layoutInflater.inflate(R.layout.activity_main,null));
     }
 
     private void initGridView(){
