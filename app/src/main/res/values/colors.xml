@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="actionBarBg">#000000</color>
+    <color name="bottomNavigationItemColor">#007aff</color>
 </resources>

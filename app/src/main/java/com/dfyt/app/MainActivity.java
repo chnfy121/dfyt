@@ -3,15 +3,18 @@ package com.dfyt.app;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.*;
+import com.dfyt.app.view.SlideShowView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private int[] imageRes = { R.drawable.gv_1, R.drawable.gv_2,
             R.drawable.gv_3, R.drawable.gv_4, R.drawable.gv_5,
@@ -24,20 +27,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-//        Button btnLogin = (Button) findViewById(R.id.btnLogin);
-//        btnLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent();
-//                intent.setClass(MainActivity.this,LoginActivity.class);
-//                startActivity(intent);
-//                //overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
-//            }
-//        });
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initGridView();
+    }
+
+    @Override
+    protected void initContextView(LinearLayout contextView) {
+        super.initContextView(contextView);
+
+        //将activity_main布局加入主布局中
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        contextView.addView(layoutInflater.inflate(R.layout.activity_main,null));
     }
 
     private void initGridView(){
