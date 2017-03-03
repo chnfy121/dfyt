@@ -2,6 +2,7 @@ package com.dfyt.app;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.v4.app.ActivityManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -17,6 +18,14 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 public class BaseActivity extends AppCompatActivity {
 
     private BottomNavigationBar bottomNavigationBar;
+    private Boolean useBackButton = true; //主页禁用返回按钮事件
+
+    public Boolean getUseBackButton() {
+        return useBackButton;
+    }
+    public void setUseBackButton(Boolean useBackButton) {
+        this.useBackButton = useBackButton;
+    }
 
     public BottomNavigationBar getBottomNavigationBar() {
         return bottomNavigationBar;
@@ -45,9 +54,6 @@ public class BaseActivity extends AppCompatActivity {
 
     //toolbar导航
     protected void initToolBar(){
-        LayoutInflater layoutInflater = LayoutInflater.from(this);
-        layoutInflater.inflate(R.layout.activity_login,null);
-
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -55,7 +61,9 @@ public class BaseActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                if(useBackButton){
+                    onBackPressed();
+                }
             }
         });
     }
@@ -63,6 +71,7 @@ public class BaseActivity extends AppCompatActivity {
     //底部导航
     protected void initBottomNavigationBar(){
         bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
+        bottomNavigationBar.setVisibility(View.VISIBLE);
 
         bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.bnb_11,"主页").setActiveColorResource(R.color.bottomNavigationItemColor))
                            .addItem(new BottomNavigationItem(R.drawable.bnb_21,"我要投资").setActiveColorResource(R.color.bottomNavigationItemColor))
@@ -76,7 +85,9 @@ public class BaseActivity extends AppCompatActivity {
             public void onTabSelected(int position) {
                 switch (position){
                     case 0:
-                        onBackPressed();
+                        if(useBackButton){
+                            onBackPressed();
+                        }
                         break;
                     case 1:
                         break;

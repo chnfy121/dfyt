@@ -1,18 +1,13 @@
 package com.dfyt.app;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 import android.widget.*;
-import com.dfyt.app.view.SlideShowView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class MainActivity extends BaseActivity {
 
@@ -29,6 +24,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initGridView();
+        setUseBackButton(false);
     }
 
     @Override
@@ -54,7 +50,7 @@ public class MainActivity extends BaseActivity {
         //生成适配器的ImageItem 与动态数组的元素相对应
         SimpleAdapter saImageItems = new SimpleAdapter(this,
                 lstImageItem,//数据来源
-                R.layout.layout_dfyt_gridview_item,//item的XML实现
+                R.layout.layout_gridview_item,//item的XML实现
 
                 //动态数组与ImageItem对应的子项
                 new String[]{"ItemImage", "ItemText"},
