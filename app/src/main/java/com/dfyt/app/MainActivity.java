@@ -78,6 +78,10 @@ public class MainActivity extends AppCompatActivity {
                    startActivity(loginIntent);
                    break;
                }
+               case 2:{
+                   Intent userGuidIntent = new Intent(MainActivity.this, UserGuideActivity.class);
+                   startActivity(userGuidIntent);
+               }
            }
         }
     }
